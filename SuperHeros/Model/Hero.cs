@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace SuperHeros.Model
 {
-    internal class Hero
+    public class Hero
     {
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
@@ -25,9 +25,17 @@ namespace SuperHeros.Model
         [JsonProperty(PropertyName = "biography")]
         public Biography Biography { get; set; }
 
+        [JsonProperty(PropertyName = "appearance")]
+        public Appearance Appearance { get; set; }
+
+        [JsonProperty(PropertyName = "work")]
+        public Work Work { get; set; }
+
+        [JsonProperty(PropertyName = "connections")]
+        public Connections Connections { get; set; }
     }
 
-    internal class PowerStats
+    public class PowerStats
     {
         [JsonProperty(PropertyName = "intelligence")]
         public string Intelligence { get; set; }
@@ -47,17 +55,13 @@ namespace SuperHeros.Model
         [JsonProperty(PropertyName = "combat")]
         public string Combat { get; set; }
     }
-
-    internal class ImageURL
-    {
-        [JsonProperty(PropertyName = "url")]
-        public string url { get; set; }
-    }
-
-    internal class Biography 
+    public class Biography 
     {
         [JsonProperty(PropertyName = "full-name")]
         public string fullName { get; set; }
+
+        [JsonProperty(PropertyName = "alter-egos")]
+        public string alterEgos { get; set; }
 
         [JsonProperty(PropertyName = "place-of-birth")]
         public string placeOfBirth { get; set; }
@@ -67,6 +71,48 @@ namespace SuperHeros.Model
 
         [JsonProperty(PropertyName = "publisher")]
         public string publisher { get; set; }
-
     }
+
+    public class Appearance
+    {
+        [JsonProperty(PropertyName = "gender")]
+        public string Gender { get; set; }
+
+        [JsonProperty(PropertyName = "height")]
+        public List<string> Height { get; set; }
+
+        [JsonProperty(PropertyName = "weight")]
+        public List<string> Weight { get; set; }
+
+        [JsonProperty(PropertyName = "eye-color")]
+        public string EyeColor { get; set; }
+
+        [JsonProperty(PropertyName = "hair-color")]
+        public string HairColor { get; set; }
+    }
+
+    public class Work
+    {
+        [JsonProperty(PropertyName = "occupation")]
+        public string Occupation { get; set; }
+
+        [JsonProperty(PropertyName = "base")]
+        public string Base { get; set; }
+    }
+
+    public class Connections
+    {
+        [JsonProperty(PropertyName = "group-affiliation")]
+        public string GroupAffiliation { get; set; }
+
+        [JsonProperty(PropertyName = "relatives")]
+        public string Relatives { get; set; }
+    }
+
+    public class ImageURL
+    {
+        [JsonProperty(PropertyName = "url")]
+        public string url { get; set; }
+    }
+
 }

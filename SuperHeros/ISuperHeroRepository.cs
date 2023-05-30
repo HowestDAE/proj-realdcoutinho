@@ -9,7 +9,7 @@ using SuperHeros.Repository;
 namespace SuperHeros.Repository
 {
     public interface ISuperHeroRepository
-    {
-        Task GetHeros();
+    { 
+        Task<List<Hero>> GetHeros();
     }
 }

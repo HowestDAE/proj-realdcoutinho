@@ -15,9 +15,12 @@ namespace SuperHeros.Repository
     {
         private static List<Hero> _heroes;
 
-        public async Task GetHeros()
+        public async Task<List<Hero>> GetHeros()
         {
+            if (_heroes != null) return _heroes;
+
             await LoadHeros();
+            return _heroes;
         }
 
         private async Task LoadHeros()

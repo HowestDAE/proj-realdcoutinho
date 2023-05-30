@@ -10,7 +10,7 @@ using SuperHeros.Model;
 
 namespace SuperHeros.Repository
 {
-    internal class HeroRepository : ISuperHeroRepository
+    internal class HerosApiRepository : ISuperHeroRepository
     {
         private static List<Hero> _heroes;
         private static List<int> _heroIds;
@@ -20,21 +20,21 @@ namespace SuperHeros.Repository
             _heroIds = new List<int>();
             _heroIds.Add(70);
             _heroIds.Add(644);
-            _heroIds.Add(38);
+            _heroIds.Add(720);
             _heroIds.Add(63);
 
             _heroIds.Add(620);
             _heroIds.Add(346);
-            _heroIds.Add(332);
+            _heroIds.Add(157);
             _heroIds.Add(107);
         }
 
-        public async Task GetHeroes()
+        public async Task<List<Hero>> GetHeros()
         {
-            if (_heroes == null)
-            {
-                await LoadHeros();
-            }
+            if (_heroes != null) return _heroes;
+
+            await LoadHeros();
+            return _heroes;
         }
         private async Task LoadHeros()
         {
@@ -84,11 +84,6 @@ namespace SuperHeros.Repository
                 Console.WriteLine("hero");
             }
         
-        }
-
-        public Task GetHeros()
-        {
-            throw new NotImplementedException();
         }
     }
     

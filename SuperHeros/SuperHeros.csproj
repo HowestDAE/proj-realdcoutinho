@@ -87,8 +87,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ISuperHeroRepository.cs" />
-    <Compile Include="Repository\HeroRepository.cs" />
+    <Compile Include="Repository\HerosApiRepository.cs" />
     <Compile Include="Repository\HerosLocalRepository.cs" />
+    <Compile Include="ViewModel\HeroOverViewVM.cs" />
+    <Compile Include="ViewModel\MainViewVM.cs" />
+    <Compile Include="View\HeroDetailPage.xaml.cs">
+      <DependentUpon>HeroDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HeroOverViewPage.xaml.cs">
+      <DependentUpon>HeroOverViewPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,6 +109,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\HeroDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HeroOverViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Hero.cs" />

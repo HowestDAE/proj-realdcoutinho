@@ -33,3 +33,7 @@ C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\D
 C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\Debug\SuperHeros.csproj.CopyComplete
 C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\Debug\SuperHeros.exe
 C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\Debug\SuperHeros.pdb
+C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\Debug\View\HeroDetailPage.g.cs
+C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\Debug\View\HeroDetailPage.baml
+C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\Debug\View\HeroOverViewPage.g.cs
+C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\Debug\View\HeroOverViewPage.baml
