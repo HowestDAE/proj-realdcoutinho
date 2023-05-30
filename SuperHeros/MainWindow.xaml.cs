@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using SuperHeros.Model;
+using SuperHeros.Repository;
+
 namespace SuperHeros
 {
     /// <summary>
@@ -20,9 +23,22 @@ namespace SuperHeros
     /// </summary>
     public partial class MainWindow : Window
     {
+        private HeroRepository _heroRepository;
+
+        private ISuperHeroRepository _repository;
+
         public MainWindow()
         {
             InitializeComponent();
+            _heroRepository = new HeroRepository();
+            _repository = new HerosLocalRepository();
+            GetHeros();
+        }
+
+        public async void GetHeros()
+        {
+            //await _heroRepository.GetHeroes();
+            await _repository.GetHeros();
         }
     }
 }
