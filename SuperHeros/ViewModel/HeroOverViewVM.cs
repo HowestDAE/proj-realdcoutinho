@@ -12,8 +12,7 @@ namespace SuperHeros.ViewModel
 {
     internal class HeroOverViewVM : ObservableObject
     {
-        private List<Hero> _heroList;
-
+        private List<Hero> _heroList = new List<Hero>();
         public List<Hero> Heros
         {
             get { return _heroList; }
@@ -37,8 +36,8 @@ namespace SuperHeros.ViewModel
 
         public HeroOverViewVM()
         {
-            //LoadHerosAsync();
-            LoadHeros();
+            LoadHerosAsync();
+            //LoadHeros();
         }
 
         private async void LoadHerosAsync()
@@ -48,11 +47,8 @@ namespace SuperHeros.ViewModel
 
         private void LoadHeros()
         {
-            Heros = HerosLocalRepository.GetHeros();
-            foreach (Hero he in Heros)
-            {
-                Console.WriteLine("hero");
-            }
+            Heros = HerosLocalRepository.GetHeros(); 
         }
+
     }
 }

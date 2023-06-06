@@ -50,6 +50,16 @@
                     Grid.Row="2" Grid.Column="1"
                     ItemsSource="{Binding Heros}" SelectedIndex="0"
                     SelectedItem="{Binding SelectedHero}" SelectionMode="Single">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <!-- should contain type icon image when binding -->
+                            <!-- binding needed -->
+                            <TextBlock Text="{Binding Name}" Margin="10,0" Foreground="black" VerticalAlignment="Center" FontSize="21"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
             </ListBox>
             
             

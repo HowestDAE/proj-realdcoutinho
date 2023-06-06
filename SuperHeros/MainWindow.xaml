@@ -13,6 +13,6 @@
     </Window.DataContext>
 
     <Grid>
-        
+        <Frame NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"/>
     </Grid>
 </Window>

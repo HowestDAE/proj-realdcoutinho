@@ -14,11 +14,23 @@ namespace SuperHeros.ViewModel
 {
     internal class MainViewVM : ObservableObject
     {
-        public HeroOverViewPage HeroOverView { get; set; } = new HeroOverViewPage();
-        public HeroDetailPage HeroDetailPage { get; set; } = new HeroDetailPage();
+        public HeroOverViewPage HeroOverView 
+        { 
+            get;
+        } = new HeroOverViewPage();
+        public HeroDetailPage HeroDetailPage 
+        { 
+            get;
+        } = new HeroDetailPage();
 
-        public Page CurrentPage { get; set; } = new HeroOverViewPage();
 
+   
+        public Page CurrentPage
+        {
+            get;
+            set;
+
+        }
         public RelayCommand SwitchPageCommand { get; set; }
 
 
@@ -44,7 +56,8 @@ namespace SuperHeros.ViewModel
 
         public MainViewVM()
         {
-            SwitchPageCommand = new RelayCommand(SwitchPage);
+            CurrentPage = HeroOverView;
+            //SwitchPageCommand = new RelayCommand(SwitchPage);
         }
 
     }
