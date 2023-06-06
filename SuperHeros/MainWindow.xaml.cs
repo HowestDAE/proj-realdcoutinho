@@ -23,22 +23,10 @@ namespace SuperHeros
     /// </summary>
     public partial class MainWindow : Window
     {
-        private HerosApiRepository _heroRepository;
-
-        private ISuperHeroRepository _repository;
 
         public MainWindow()
         {
             InitializeComponent();
-            _heroRepository = new HerosApiRepository();
-            _repository = new HerosLocalRepository();
-            GetHeros();
-        }
-
-        public async void GetHeros()
-        {
-            await _heroRepository.GetHeros();
-            await _repository.GetHeros();
         }
     }
 }

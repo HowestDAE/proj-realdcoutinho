@@ -24,5 +24,14 @@ namespace SuperHeros.View
         {
             InitializeComponent();
         }
+
+        private void Hero_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // cast sender to listbox
+            ListBox listBox = (ListBox)sender;
+
+            if (listBox.SelectedIndex == -1)
+                listBox.SelectedIndex = 0;
+        }
     }
 }

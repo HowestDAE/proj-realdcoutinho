@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SuperHeros.Model;
+using SuperHeros.Repository;
 
 
 namespace SuperHeros.ViewModel
@@ -31,6 +32,26 @@ namespace SuperHeros.ViewModel
             {
                 _selectedHero = value;
                 OnPropertyChanged(nameof(SelectedHero));
+            }
+        }
+
+        public HeroOverViewVM()
+        {
+            //LoadHerosAsync();
+            LoadHeros();
+        }
+
+        private async void LoadHerosAsync()
+        {
+            Heros = await HerosApiRepository.GetHeros();
+        }
+
+        private void LoadHeros()
+        {
+            Heros = HerosLocalRepository.GetHeros();
+            foreach (Hero he in Heros)
+            {
+                Console.WriteLine("hero");
             }
         }
     }

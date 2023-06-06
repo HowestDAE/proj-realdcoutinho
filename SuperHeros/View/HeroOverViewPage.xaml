@@ -4,10 +4,17 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SuperHeros.View"
+            xmlns:vm="clr-namespace:SuperHeros.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HeroOverViewPage"
       Background="Gray">
+
+
+    <Page.DataContext>
+        <vm:HeroOverViewVM/>
+    </Page.DataContext>
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -38,7 +45,14 @@
 
             <!-- Right Column Content -->
             <TextBlock Grid.Column="1" Text="names" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
-
+            <!-- AGENT SELECTION -->
+            <ListBox x:Name="HeroList" SelectionChanged="Hero_SelectionChanged"
+                    Grid.Row="2" Grid.Column="1"
+                    ItemsSource="{Binding Heros}" SelectedIndex="0"
+                    SelectedItem="{Binding SelectedHero}" SelectionMode="Single">
+            </ListBox>
+            
+            
             <TextBlock Grid.Column="2" Text="DC/MARVEL info" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
         </Grid>

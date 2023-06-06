@@ -11,21 +11,14 @@ using System.Threading.Tasks;
 
 namespace SuperHeros.Repository
 {
-    internal class HerosLocalRepository : ISuperHeroRepository
+    internal class HerosLocalRepository /*: ISuperHeroRepository*/
     {
-        private static List<Hero> _heroes;
-
-        public async Task<List<Hero>> GetHeros()
+        private static List<Hero> _heros;
+        public static List<Hero> GetHeros()
         {
-            if (_heroes != null) return _heroes;
+            if (_heros != null) return _heros;
 
-            await LoadHeros();
-            return _heroes;
-        }
-
-        private async Task LoadHeros()
-        {
-            if (_heroes != null) return;
+            _heros = new List<Hero>();
 
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = "SuperHeros.Resources.Data.Heros.json";
@@ -36,17 +29,11 @@ namespace SuperHeros.Repository
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string json = reader.ReadToEnd();
-                    _heroes = JsonConvert.DeserializeObject<List<Hero>>(json);
+                    _heros = JsonConvert.DeserializeObject<List<Hero>>(json);
 
                 }
             }
-
-
-            foreach (Hero he in _heroes)
-            {
-                Console.WriteLine("hero");
-            }
-
+            return _heros;
         }
     }
 }

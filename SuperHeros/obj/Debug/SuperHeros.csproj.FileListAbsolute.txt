@@ -37,3 +37,4 @@ C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\D
 C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\Debug\View\HeroDetailPage.baml
 C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\Debug\View\HeroOverViewPage.g.cs
 C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\Debug\View\HeroOverViewPage.baml
+C:\Users\diogo\Documents\GitHub\Toold Dev C#\proj-realdcoutinho\SuperHeros\obj\Debug\GeneratedInternalTypeHelper.g.cs

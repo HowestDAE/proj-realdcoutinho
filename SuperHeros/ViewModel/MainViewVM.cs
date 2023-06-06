@@ -14,11 +14,38 @@ namespace SuperHeros.ViewModel
 {
     internal class MainViewVM : ObservableObject
     {
-        public HeroOverViewPage HeroViewPage { get; set; } = new HeroOverViewPage();
+        public HeroOverViewPage HeroOverView { get; set; } = new HeroOverViewPage();
         public HeroDetailPage HeroDetailPage { get; set; } = new HeroDetailPage();
 
         public Page CurrentPage { get; set; } = new HeroOverViewPage();
 
         public RelayCommand SwitchPageCommand { get; set; }
+
+
+        public bool IsInOverview => CurrentPage is HeroOverViewPage;
+        public bool IsInDetail => CurrentPage is HeroDetailPage;
+
+        public void SwitchPage()
+        {
+            if (CurrentPage is HeroOverViewPage)
+            {
+                Hero selectedHero = (CurrentPage.DataContext as HeroOverViewVM).SelectedHero;
+                OnPropertyChanged(nameof(CurrentPage));
+            }
+            else
+            {
+                CurrentPage = HeroOverView;
+                OnPropertyChanged(nameof(CurrentPage));
+            }
+
+            OnPropertyChanged(nameof(IsInDetail));
+            OnPropertyChanged(nameof(IsInOverview));
+        }
+
+        public MainViewVM()
+        {
+            SwitchPageCommand = new RelayCommand(SwitchPage);
+        }
+
     }
 }
