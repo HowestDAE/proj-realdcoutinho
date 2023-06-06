@@ -69,6 +69,40 @@ namespace SuperHeros.Repository
 
             return _heros;
         }
+
+        public static async Task<List<Hero>> GetHerosByPublisherAsync(string publisher)
+        {
+            if (_heros == null)
+            {
+                _heros = await GetHeros();
+            }
+
+            if (publisher.ToLower() == "all") return _heros;
+            else return _heros.Where(_heros => _heros.Biography.Publisher.ToLower() == publisher.ToLower()).ToList();
+        }
+
+        public static async Task<List<Hero>> GetHerosByGenderAsync(string gender)
+        {
+            if (_heros == null)
+            {
+                _heros = await GetHeros();
+            }
+
+            if (gender.ToLower() == "all") return _heros;
+            else return _heros.Where(_heros => _heros.Appearance.Gender.ToLower() == gender.ToLower()).ToList();
+        }
+
+        public static async Task<List<Hero>> GetHerosByNameAsync(string name)
+        {
+            if (_heros == null)
+            {
+                _heros = await GetHeros();
+            }
+
+            if (name.ToLower() == "all") return _heros;
+            else return _heros.Where(_heros => _heros.Name.ToLower() == name.ToLower()).ToList();
+        }
+
     }
     
 }

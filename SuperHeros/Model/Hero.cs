@@ -58,19 +58,19 @@ namespace SuperHeros.Model
     public class Biography 
     {
         [JsonProperty(PropertyName = "full-name")]
-        public string fullName { get; set; }
+        public string FullName { get; set; }
 
         [JsonProperty(PropertyName = "alter-egos")]
-        public string alterEgos { get; set; }
+        public string AlterEgos { get; set; }
 
         [JsonProperty(PropertyName = "place-of-birth")]
-        public string placeOfBirth { get; set; }
+        public string PlaceOfBirth { get; set; }
 
         [JsonProperty(PropertyName = "first-appearance")]
-        public string firstAppearance { get; set; }
+        public string FirstAppearance { get; set; }
 
         [JsonProperty(PropertyName = "publisher")]
-        public string publisher { get; set; }
+        public string Publisher { get; set; }
     }
 
     public class Appearance

@@ -35,5 +35,39 @@ namespace SuperHeros.Repository
             }
             return _heros;
         }
+
+        public static List<Hero> GetHerosByPublisher(string publisher)
+        {
+            if (_heros == null)
+            {
+                _heros = GetHeros();
+            }
+
+            if (publisher.ToLower() == "all") return _heros;
+            else return _heros.Where(_heros => _heros.Biography.Publisher.ToLower() == publisher.ToLower()).ToList();
+        }
+
+        public static List<Hero> GetHerosByGender(string gender)
+        {
+            if (_heros == null)
+            {
+                _heros = GetHeros();
+            }
+
+            if (gender.ToLower() == "all") return _heros;
+            else return _heros.Where(_heros => _heros.Appearance.Gender.ToLower() == gender.ToLower()).ToList();
+        }
+
+        public static List<Hero> GetHerosByName(string name)
+        {
+            if (_heros == null)
+            {
+                _heros = GetHeros();
+            }
+
+            if (name.ToLower() == "all") return _heros;
+            else return _heros.Where(_heros => _heros.Name.ToLower() == name.ToLower()).ToList();
+        }
+
     }
 }

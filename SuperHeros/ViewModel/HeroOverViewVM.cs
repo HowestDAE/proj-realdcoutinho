@@ -34,6 +34,21 @@ namespace SuperHeros.ViewModel
             }
         }
 
+        private string _filterType;
+        public string FilterType
+        {
+            get { return _filterType; }
+            set
+            {
+                _filterType = value;
+                if (_filterType != null)
+                {
+                    OnPropertyChanged(nameof(FilterType));
+                }
+            }
+        }
+
+
         public HeroOverViewVM()
         {
             LoadHerosAsync();
@@ -47,8 +62,71 @@ namespace SuperHeros.ViewModel
 
         private void LoadHeros()
         {
-            Heros = HerosLocalRepository.GetHeros(); 
+            Heros = HerosLocalRepository.GetHeros();
         }
 
+        /// /////////////////////
+        ///     FILTERS /////////
+        ////////////////////////
+        #region FILTERS
+        public void FilterHerosByPublisher(string publisher)
+        {
+            Heros = HerosLocalRepository.GetHerosByPublisher(publisher);
+            FilterType = publisher;
+        }
+
+        public async Task FilterHerosByPublisherAsync(string publisher)
+        {
+            Heros = await HerosApiRepository.GetHerosByPublisherAsync(publisher);
+            FilterType = publisher;
+        }
+
+        public void FilterHerosByGender(string gender)
+        {
+            Heros = HerosLocalRepository.GetHerosByGender(gender);
+            FilterType = gender;
+        }
+
+        public async Task FilterHerosByGenderAsync(string gender)
+        {
+            Heros = await HerosApiRepository.GetHerosByGenderAsync(gender);
+            FilterType = gender;
+        }
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //public void FilterHerosByName()
+        //{
+        //    Agents = AgentsLocalRepository.GetAgentsByName(SearchText);
+
+        //    if (SelectedRole != null && SelectedRole != string.Empty && SelectedRole.ToUpper() != "ALL")
+        //    {
+        //        Agents = Agents.Where(agent => agent.role.displayName == SelectedRole).ToList();
+        //    }
+        //}
+
+        //public async Task FilterAgentsByNameAsync()
+        //{
+        //    Agents = await AgentsApiRepository.GetAgentsByNameAsync(SearchText);
+
+        //    //remove agents with wrong role
+        //    if (SelectedRole != null && SelectedRole != string.Empty && SelectedRole.ToUpper() != "ALL")
+        //    {
+        //        Agents = Agents.Where(agent => agent.role.displayName == SelectedRole).ToList();
+        //    }
+        //}
     }
 }
