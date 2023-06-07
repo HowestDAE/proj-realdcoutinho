@@ -4,11 +4,18 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SuperHeros.View"
+      xmlns:vm="clr-namespace:SuperHeros.ViewModel"
+
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HeroDetailPage">
 
+    <Page.DataContext>
+        <vm:DetailPageVM/>
+    </Page.DataContext>
+
     <Grid>
-        
+        <TextBlock Text="{Binding SelectedHero.Name, FallbackValue='Name'}" FontSize="35" 
+                       VerticalAlignment="Center" Margin="267,0,267,0" />
     </Grid>
 </Page>

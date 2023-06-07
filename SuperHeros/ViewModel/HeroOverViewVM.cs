@@ -34,25 +34,44 @@ namespace SuperHeros.ViewModel
             }
         }
 
-        private string _filterType;
-        public string FilterType
+        private List<string> _filterTypes;
+        public List<string> FilterTypes
         {
-            get { return _filterType; }
+            get { return _filterTypes; }
             set
             {
-                _filterType = value;
-                if (_filterType != null)
+                _filterTypes = value;
+                if (_filterTypes != null)
                 {
-                    OnPropertyChanged(nameof(FilterType));
+                    OnPropertyChanged(nameof(FilterTypes));
+                }
+            }
+        }
+
+        private string _selectedType;
+        public string SelectedType
+        {
+            get { return _selectedType; }
+            set
+            {
+                _selectedType = value;
+                if (_selectedType != null)
+                {
+                    SetProperty(ref _selectedType, value);
+                    Heros = HerosLocalRepository.GetHeroTypes(value);
+                    OnPropertyChanged(nameof(SelectedType));
                 }
             }
         }
 
 
+
         public HeroOverViewVM()
         {
-            LoadHerosAsync();
-            //LoadHeros();
+            LoadHeros();
+            FilterTypes = HerosLocalRepository.GetHeroTypes();
+            //LoadHerosAsync();
+            //FilterType = HerosApiRepository.GetHeroTypes();
         }
 
         private async void LoadHerosAsync()
@@ -72,25 +91,25 @@ namespace SuperHeros.ViewModel
         public void FilterHerosByPublisher(string publisher)
         {
             Heros = HerosLocalRepository.GetHerosByPublisher(publisher);
-            FilterType = publisher;
+            SelectedType = publisher;
         }
 
         public async Task FilterHerosByPublisherAsync(string publisher)
         {
             Heros = await HerosApiRepository.GetHerosByPublisherAsync(publisher);
-            FilterType = publisher;
+            SelectedType = publisher;
         }
 
         public void FilterHerosByGender(string gender)
         {
             Heros = HerosLocalRepository.GetHerosByGender(gender);
-            FilterType = gender;
+            SelectedType = gender;
         }
 
         public async Task FilterHerosByGenderAsync(string gender)
         {
             Heros = await HerosApiRepository.GetHerosByGenderAsync(gender);
-            FilterType = gender;
+            SelectedType = gender;
         }
         #endregion
 

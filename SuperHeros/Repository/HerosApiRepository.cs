@@ -22,15 +22,15 @@ namespace SuperHeros.Repository
             if (_heroIds == null)
             {
                 _heroIds = new List<int>();
-                _heroIds.Add(70);
-                _heroIds.Add(644);
-                _heroIds.Add(720);
-                _heroIds.Add(63);
+                _heroIds.Add(70);  //batman // works
+                _heroIds.Add(263); //flash  // works
+                _heroIds.Add(720); //wonder woman // works
+                _heroIds.Add(542); //catwoman // works
 
-                _heroIds.Add(620);
-                _heroIds.Add(346);
-                _heroIds.Add(157);
-                _heroIds.Add(107);
+                _heroIds.Add(620); //spider man
+                _heroIds.Add(346); //iron man // works
+                _heroIds.Add(275); // Gamora // works
+                _heroIds.Add(107); //balck widow
             }
 
          
@@ -70,6 +70,23 @@ namespace SuperHeros.Repository
             return _heros;
         }
 
+
+        public static async Task<List<string>> GetHeroTypes()
+        {
+            List<Hero> allHeros = await GetHeros();
+
+            List<string> types = new List<string>();
+
+            List<string> uniquePublishers = allHeros.Select(hero => hero.Biography.Publisher).Distinct().ToList();
+            List<string> uniqueGenders = allHeros.Select(hero => hero.Appearance.Gender).Distinct().ToList();
+
+            types.AddRange(uniquePublishers);
+            types.AddRange(uniqueGenders);
+
+            return types;
+        }
+
+        #region FILTERS
         public static async Task<List<Hero>> GetHerosByPublisherAsync(string publisher)
         {
             if (_heros == null)
@@ -102,7 +119,8 @@ namespace SuperHeros.Repository
             if (name.ToLower() == "all") return _heros;
             else return _heros.Where(_heros => _heros.Name.ToLower() == name.ToLower()).ToList();
         }
+        #endregion
 
     }
-    
+
 }

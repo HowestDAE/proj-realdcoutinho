@@ -35,6 +35,25 @@ namespace SuperHeros.Model
         public Connections Connections { get; set; }
     }
 
+    public class Biography
+    {
+        [JsonProperty(PropertyName = "publisher")]
+        public string Publisher { get; set; }
+
+        [JsonProperty(PropertyName = "full-name")]
+        public string FullName { get; set; }
+
+        [JsonProperty(PropertyName = "alter-egos")]
+        public string AlterEgos { get; set; }
+
+        [JsonProperty(PropertyName = "place-of-birth")]
+        public string PlaceOfBirth { get; set; }
+
+        [JsonProperty(PropertyName = "first-appearance")]
+        public string FirstAppearance { get; set; }
+    }
+
+
     public class PowerStats
     {
         [JsonProperty(PropertyName = "intelligence")]
@@ -55,23 +74,7 @@ namespace SuperHeros.Model
         [JsonProperty(PropertyName = "combat")]
         public string Combat { get; set; }
     }
-    public class Biography 
-    {
-        [JsonProperty(PropertyName = "full-name")]
-        public string FullName { get; set; }
 
-        [JsonProperty(PropertyName = "alter-egos")]
-        public string AlterEgos { get; set; }
-
-        [JsonProperty(PropertyName = "place-of-birth")]
-        public string PlaceOfBirth { get; set; }
-
-        [JsonProperty(PropertyName = "first-appearance")]
-        public string FirstAppearance { get; set; }
-
-        [JsonProperty(PropertyName = "publisher")]
-        public string Publisher { get; set; }
-    }
 
     public class Appearance
     {

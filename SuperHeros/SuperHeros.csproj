@@ -89,6 +89,7 @@
     <Compile Include="ISuperHeroRepository.cs" />
     <Compile Include="Repository\HerosApiRepository.cs" />
     <Compile Include="Repository\HerosLocalRepository.cs" />
+    <Compile Include="ViewModel\DetailPageVM.cs" />
     <Compile Include="ViewModel\HeroOverViewVM.cs" />
     <Compile Include="ViewModel\MainViewVM.cs" />
     <Compile Include="View\HeroDetailPage.xaml.cs">

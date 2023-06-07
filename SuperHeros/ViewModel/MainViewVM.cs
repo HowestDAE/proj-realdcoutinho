@@ -24,38 +24,103 @@ namespace SuperHeros.ViewModel
         } = new HeroDetailPage();
 
 
-   
+
+        public HeroOverViewPage MainPage
+        {
+            get; set;
+        } = new HeroOverViewPage();
+
+        private Page _currentPage;
+
         public Page CurrentPage
         {
-            get;
-            set;
+            get { return _currentPage; }
+            set
+            {
+                _currentPage = value;
+                OnPropertyChanged(nameof(CurrentPage));
+                OnPropertyChanged(nameof(CommandText));
+            }
+        }
+
+
+        public string CommandText
+        {
+            get
+            {
+                if (CurrentPage is HeroOverViewPage) //overView page -> go to details page
+                {
+                    return "SHOW DETAILS";
+                }
+                else
+                {
+                    return "GO BACK";
+                }
+            }
 
         }
-        public RelayCommand SwitchPageCommand { get; set; }
+
+        private RelayCommand _switchPageCommand;
+        public RelayCommand SwitchPageCommand
+        {
+            get
+            {
+                if (_switchPageCommand == null)
+                {
+                    // Initialize the RelayCommand with the SwitchPage function
+                    _switchPageCommand = new RelayCommand(SwitchPage);
+                }
+                return _switchPageCommand;
+            }
+        }
 
 
-        public bool IsInOverview => CurrentPage is HeroOverViewPage;
-        public bool IsInDetail => CurrentPage is HeroDetailPage;
+
+        //public bool IsInOverview => CurrentPage is HeroOverViewPage;
+        //public bool IsInDetail => CurrentPage is HeroDetailPage;
 
         public void SwitchPage()
         {
+            //if (CurrentPage is HeroOverViewPage)
+            //{
+            //    Hero selectedHero = (CurrentPage.DataContext as HeroOverViewVM).SelectedHero;
+            //    OnPropertyChanged(nameof(CurrentPage));
+            //}
+            //else
+            //{
+            //    CurrentPage = HeroOverView;
+            //    OnPropertyChanged(nameof(CurrentPage));
+            //}
+
+            //OnPropertyChanged(nameof(IsInDetail));
+            //OnPropertyChanged(nameof(IsInOverview));
+
             if (CurrentPage is HeroOverViewPage)
             {
-                Hero selectedHero = (CurrentPage.DataContext as HeroOverViewVM).SelectedHero;
-                OnPropertyChanged(nameof(CurrentPage));
+                //get the selected pokemon
+                Hero selectedHero = (MainPage.DataContext as HeroOverViewVM).SelectedHero;
+                if (selectedHero == null)
+                {
+                    CurrentPage = MainPage;
+                    return;
+                }
+
+
+                (HeroDetailPage.DataContext as DetailPageVM).CurrentHero = selectedHero;
+
+                //Set the current page. TODO notify the view of the change
+                CurrentPage = HeroDetailPage;
             }
             else
             {
-                CurrentPage = HeroOverView;
-                OnPropertyChanged(nameof(CurrentPage));
+                CurrentPage = MainPage;
             }
 
-            OnPropertyChanged(nameof(IsInDetail));
-            OnPropertyChanged(nameof(IsInOverview));
         }
 
         public MainViewVM()
         {
+            HeroDetailPage = new HeroDetailPage();
             CurrentPage = HeroOverView;
             //SwitchPageCommand = new RelayCommand(SwitchPage);
         }

@@ -21,6 +21,7 @@
             <RowDefinition Height="20" />
             <!-- First Row -->
             <RowDefinition Height="20" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="*" />
             <!-- Second Row -->
             <RowDefinition Height="40" />
@@ -30,14 +31,18 @@
         <!-- First Row - Title -->
         <TextBlock Grid.Row="0" Text="Title" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-        <!-- Second Row - Two Columns -->
         <Grid Grid.Row="2">
+            <ComboBox x:Name="pokeTypes" Grid.Row="0" ItemsSource="{Binding FilterTypes}" SelectedItem="{Binding SelectedType}"/>
+        </Grid>
+        <!-- Second Row - Two Columns -->
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="350" />
-                <!-- Left Column -->
+                <!--<ColumnDefinition Width="80
+                                  " />
+                --><!-- Left Column --><!--
                 <ColumnDefinition Width="200" />
-                <!-- Right Column -->
-                <ColumnDefinition Width="*" />
+                --><!-- Right Column --><!--
+                <ColumnDefinition Width="*" />-->
             </Grid.ColumnDefinitions>
 
             <!-- Left Column Content -->
@@ -45,26 +50,29 @@
 
             <!-- Right Column Content -->
             <TextBlock Grid.Column="1" Text="names" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <!-- AGENT SELECTION -->
-            <ListBox x:Name="HeroList" SelectionChanged="Hero_SelectionChanged"
-                    Grid.Row="2" Grid.Column="1"
-                    ItemsSource="{Binding Heros}" SelectedIndex="0"
-                    SelectedItem="{Binding SelectedHero}" SelectionMode="Single">
+
+
+
+
+            <!-- Hero SELECTION -->
+            <ListBox x:Name="HeroList"
+         Grid.Row="2" Grid.Column="1"
+         ItemsSource="{Binding Heros}" SelectedIndex="0"
+         SelectedItem="{Binding SelectedHero}" SelectionMode="Single">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="4" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <!-- should contain type icon image when binding -->
-                            <!-- binding needed -->
-                            <TextBlock Text="{Binding Name}" Margin="10,0" Foreground="black" VerticalAlignment="Center" FontSize="21"/>
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="{Binding ImageImage.url}" Height="96" Width="54" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Name}" Foreground="Black" FontSize="21"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-
             </ListBox>
-            
-            
-            <TextBlock Grid.Column="2" Text="DC/MARVEL info" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
-
         </Grid>
 
         <!-- Third Row - Button -->
