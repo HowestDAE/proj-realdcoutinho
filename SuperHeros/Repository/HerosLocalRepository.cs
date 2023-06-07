@@ -12,18 +12,18 @@ using System.Threading.Tasks;
 
 namespace SuperHeros.Repository
 {
-    internal class HerosLocalRepository /*: ISuperHeroRepository*/
+    public class HerosLocalRepository : ISuperHeroRepository
     {
         private static List<Hero> _heros;
-        public static List<Hero> GetHeros()
+        public Task<List<Hero>> GetHeros()
         {
-            if (_heros != null) return _heros;
+            if (_heros != null)
+                return Task.FromResult(_heros);
 
             _heros = new List<Hero>();
 
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = "SuperHeros.Resources.Data.Heros.json";
-
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             {
@@ -31,28 +31,13 @@ namespace SuperHeros.Repository
                 {
                     string json = reader.ReadToEnd();
                     _heros = JsonConvert.DeserializeObject<List<Hero>>(json);
-
                 }
             }
-            return _heros;
+
+            return Task.FromResult(_heros);
         }
 
-        //public static List<string> GetHeroTypes()
-        //{
-        //    List<Hero> allHeros = GetHeros();
-
-        //    List<string> types = new List<string>();
-
-        //    List<string> uniquePublishers = allHeros.Select(hero => hero.Biography.Publisher).Distinct().ToList();
-
-
-        //    types.AddRange(uniquePublishers);
-
-
-        //    return types;
-        //}
-
-        public static List<string> GetHeroTypes()
+        public List<string> GetHeroTypes()
         {
             List<string> types = new List<string>();
 
@@ -64,54 +49,65 @@ namespace SuperHeros.Repository
           
             return types;
         }
-        public static List<Hero> GetHeroTypes(string heroType)
+        public List<Hero> GetHeroByTypes(string heroType)
         {
-            if (heroType.ToLower() == "all") return _heros;
+            List<Hero> list = new List<Hero>();
+            if (heroType == "All") return _heros;
 
-            List<Hero> byPublisher = new List<Hero>();
-            List<Hero> byGender = new List<Hero>();
-
-
-            byPublisher = GetHerosByPublisher(heroType);
-            byGender = GetHerosByGender(heroType);
-
-            List<Hero> mergedList = byPublisher.Concat(byGender).ToList();
-            return mergedList;
+            if (heroType == "Male" || heroType == "Female")
+            {
+                list = GetHerosByGender(heroType);
+            }
+            if (heroType == "DC Comics" || heroType == "Marvel Comics")
+            {
+                list = GetHerosByPublisher(heroType);
+            }
+            return list;
         }
 
         #region FILTERS
-        public static List<Hero> GetHerosByPublisher(string publisher)
-        {
-            if (_heros == null)
-            {
-                _heros = GetHeros();
-            }
 
-            if (publisher.ToLower() == "all") return _heros;
-            else return _heros.Where(_heros => _heros.Biography.Publisher.ToLower() == publisher.ToLower()).ToList();
+        private List<Hero> GetHerosByPublisher(string publisher)
+        {
+            return _heros.Where(_heros => _heros.Biography.Publisher.ToLower() == publisher.ToLower()).ToList();
         }
 
-        public static List<Hero> GetHerosByGender(string gender)
+        private List<Hero> GetHerosByGender(string gender)
         {
-            if (_heros == null)
-            {
-                _heros = GetHeros();
-            }
-
-            if (gender.ToLower() == "all") return _heros;
-            else return _heros.Where(_heros => _heros.Appearance.Gender.ToLower() == gender.ToLower()).ToList();
+            return _heros.Where(_heros => _heros.Appearance.Gender.ToLower() == gender.ToLower()).ToList();
         }
+        //public static List<Hero> GetHerosByPublisher(string publisher)
+        //{
+        //    if (_heros == null)
+        //    {
+        //        _heros = GetHeros();
+        //    }
 
-        public static List<Hero> GetHerosByName(string name)
-        {
-            if (_heros == null)
-            {
-                _heros = GetHeros();
-            }
+        //    if (publisher.ToLower() == "all") return _heros;
+        //    else return _heros.Where(_heros => _heros.Biography.Publisher.ToLower() == publisher.ToLower()).ToList();
+        //}
 
-            if (name.ToLower() == "all") return _heros;
-            else return _heros.Where(_heros => _heros.Name.ToLower() == name.ToLower()).ToList();
-        }
+        //public static List<Hero> GetHerosByGender(string gender)
+        //{
+        //    if (_heros == null)
+        //    {
+        //        _heros = GetHeros();
+        //    }
+
+        //    if (gender.ToLower() == "all") return _heros;
+        //    else return _heros.Where(_heros => _heros.Appearance.Gender.ToLower() == gender.ToLower()).ToList();
+        //}
+
+        //public static List<Hero> GetHerosByName(string name)
+        //{
+        //    if (_heros == null)
+        //    {
+        //        _heros = GetHeros();
+        //    }
+
+        //    if (name.ToLower() == "all") return _heros;
+        //    else return _heros.Where(_heros => _heros.Name.ToLower() == name.ToLower()).ToList();
+        //}
         #endregion
 
     }

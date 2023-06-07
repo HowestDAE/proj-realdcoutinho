@@ -18,7 +18,7 @@ namespace SuperHeros.ViewModel
         { 
             get;
         } = new HeroOverViewPage();
-        public HeroDetailPage HeroDetailPage 
+        public HeroDetailPage HeroPage 
         { 
             get;
         } = new HeroDetailPage();
@@ -76,29 +76,16 @@ namespace SuperHeros.ViewModel
 
 
 
+
         //public bool IsInOverview => CurrentPage is HeroOverViewPage;
         //public bool IsInDetail => CurrentPage is HeroDetailPage;
 
         public void SwitchPage()
         {
-            //if (CurrentPage is HeroOverViewPage)
-            //{
-            //    Hero selectedHero = (CurrentPage.DataContext as HeroOverViewVM).SelectedHero;
-            //    OnPropertyChanged(nameof(CurrentPage));
-            //}
-            //else
-            //{
-            //    CurrentPage = HeroOverView;
-            //    OnPropertyChanged(nameof(CurrentPage));
-            //}
-
-            //OnPropertyChanged(nameof(IsInDetail));
-            //OnPropertyChanged(nameof(IsInOverview));
-
             if (CurrentPage is HeroOverViewPage)
             {
                 //get the selected pokemon
-                Hero selectedHero = (MainPage.DataContext as HeroOverViewVM).SelectedHero;
+                Hero selectedHero = (CurrentPage.DataContext as HeroOverViewVM).SelectedHero;
                 if (selectedHero == null)
                 {
                     CurrentPage = MainPage;
@@ -106,10 +93,10 @@ namespace SuperHeros.ViewModel
                 }
 
 
-                (HeroDetailPage.DataContext as DetailPageVM).CurrentHero = selectedHero;
+                (HeroPage.DataContext as DetailPageVM).CurrentHero = selectedHero;
 
                 //Set the current page. TODO notify the view of the change
-                CurrentPage = HeroDetailPage;
+                CurrentPage = HeroPage;
             }
             else
             {
@@ -120,7 +107,7 @@ namespace SuperHeros.ViewModel
 
         public MainViewVM()
         {
-            HeroDetailPage = new HeroDetailPage();
+            HeroPage = new HeroDetailPage();
             CurrentPage = HeroOverView;
             //SwitchPageCommand = new RelayCommand(SwitchPage);
         }

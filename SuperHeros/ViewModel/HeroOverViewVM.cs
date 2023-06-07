@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SuperHeros.Model;
 using SuperHeros.Repository;
+using System.Windows.Controls;
+using CommunityToolkit.Mvvm.Input;
+
 
 
 namespace SuperHeros.ViewModel
@@ -13,6 +16,22 @@ namespace SuperHeros.ViewModel
     internal class HeroOverViewVM : ObservableObject
     {
         private List<Hero> _heroList = new List<Hero>();
+        private ISuperHeroRepository _heroApiRepository = new HerosApiRepository();
+        private ISuperHeroRepository _heroLocalRepository = new HerosLocalRepository();
+
+
+        private bool _IsUsingApi = false;
+
+        public bool IsUsingAPI
+        {
+            get { return _IsUsingApi; }
+            set
+            {
+                _IsUsingApi = value;
+                OnPropertyChanged(nameof(IsUsingAPI));
+            }
+        }
+
         public List<Hero> Heros
         {
             get { return _heroList; }
@@ -58,7 +77,15 @@ namespace SuperHeros.ViewModel
                 if (_selectedType != null)
                 {
                     SetProperty(ref _selectedType, value);
-                    Heros = HerosLocalRepository.GetHeroTypes(value);
+                    if (_IsUsingApi == true)
+                    {
+                        Heros = _heroApiRepository.GetHeroByTypes(value);
+                    }
+                    else
+                    {
+                        Heros = _heroLocalRepository.GetHeroByTypes(value);
+
+                    }
                     OnPropertyChanged(nameof(SelectedType));
                 }
             }
@@ -68,84 +95,87 @@ namespace SuperHeros.ViewModel
 
         public HeroOverViewVM()
         {
-            LoadHeros();
-            FilterTypes = HerosLocalRepository.GetHeroTypes();
-            //LoadHerosAsync();
-            //FilterType = HerosApiRepository.GetHeroTypes();
+            //if(_IsUsingApi)
+            //{
+            //    LoadHerosAsync();
+            //    FilterTypes = _heroApiRepository.GetHeroTypes();
+            //}
+            //else
+            //{
+                LoadHerosAsync();
+                LoadHeros();
+                FilterTypes = _heroLocalRepository.GetHeroTypes();
+            //}
+
         }
 
+
+
+
+        private async void LoadHeros()
+        {
+            Heros = await _heroLocalRepository.GetHeros();
+        }
         private async void LoadHerosAsync()
         {
-            Heros = await HerosApiRepository.GetHeros();
+            Heros = await _heroApiRepository.GetHeros();
         }
 
-        private void LoadHeros()
-        {
-            Heros = HerosLocalRepository.GetHeros();
-        }
-
-        /// /////////////////////
-        ///     FILTERS /////////
-        ////////////////////////
-        #region FILTERS
-        public void FilterHerosByPublisher(string publisher)
-        {
-            Heros = HerosLocalRepository.GetHerosByPublisher(publisher);
-            SelectedType = publisher;
-        }
-
-        public async Task FilterHerosByPublisherAsync(string publisher)
-        {
-            Heros = await HerosApiRepository.GetHerosByPublisherAsync(publisher);
-            SelectedType = publisher;
-        }
-
-        public void FilterHerosByGender(string gender)
-        {
-            Heros = HerosLocalRepository.GetHerosByGender(gender);
-            SelectedType = gender;
-        }
-
-        public async Task FilterHerosByGenderAsync(string gender)
-        {
-            Heros = await HerosApiRepository.GetHerosByGenderAsync(gender);
-            SelectedType = gender;
-        }
-        #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //public void FilterHerosByName()
+        //private void GetFilters()
         //{
-        //    Agents = AgentsLocalRepository.GetAgentsByName(SearchText);
-
-        //    if (SelectedRole != null && SelectedRole != string.Empty && SelectedRole.ToUpper() != "ALL")
-        //    {
-        //        Agents = Agents.Where(agent => agent.role.displayName == SelectedRole).ToList();
-        //    }
+        //    FilterTypes = _heroLocalRepository.GetHeroTypes();
         //}
 
-        //public async Task FilterAgentsByNameAsync()
-        //{
-        //    Agents = await AgentsApiRepository.GetAgentsByNameAsync(SearchText);
+        public string DataText
+        {
+            get
+            {
+                if (_IsUsingApi == true) //overView page -> go to details page
+                {
+                    return "API READ";
+                }
+                else
+                {
+                    return "JSON READ";
+                }
+            }
 
-        //    //remove agents with wrong role
-        //    if (SelectedRole != null && SelectedRole != string.Empty && SelectedRole.ToUpper() != "ALL")
-        //    {
-        //        Agents = Agents.Where(agent => agent.role.displayName == SelectedRole).ToList();
-        //    }
-        //}
+        }
+
+
+        private RelayCommand _switchRead;
+        public RelayCommand SwitchDataMode
+        {
+            get
+            {
+                if (_switchRead == null)
+                {
+                    // Initialize the RelayCommand with the SwitchPage function
+                    _switchRead = new RelayCommand(SwitchReadMode);
+
+                }
+                return _switchRead;
+            }
+        }
+
+
+        public void SwitchReadMode()
+        {
+
+
+            if (_IsUsingApi == true)
+            {
+                _IsUsingApi = false;
+
+            }
+            else
+            {
+                _IsUsingApi = true;
+            }
+            OnPropertyChanged(nameof(DataText));
+
+        }
+
+
     }
 }

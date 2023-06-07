@@ -6,16 +6,19 @@
         xmlns:local="clr-namespace:SuperHeros"
         xmlns:vm="clr-namespace:SuperHeros.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="700" Width="1244">
 
     <Window.DataContext>
         <vm:MainViewVM/>
+        <!--<vm:HeroOverViewVM/>-->
     </Window.DataContext>
 
     <Grid>
         <Frame NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"/>
         <Button VerticalAlignment="Bottom"
                 Command="{Binding SwitchPageCommand}"
-                Content="{Binding CommandText}"/>
+                Content="{Binding CommandText}" Margin="334,0,361,0"/>
+
+
     </Grid>
 </Window>

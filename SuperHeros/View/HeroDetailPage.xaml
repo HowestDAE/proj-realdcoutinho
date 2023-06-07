@@ -15,7 +15,10 @@
     </Page.DataContext>
 
     <Grid>
-        <TextBlock Text="{Binding SelectedHero.Name, FallbackValue='Name'}" FontSize="35" 
+        <Image Source="http://i.imgur.com/tJDTJwX.png" Stretch="UniformToFill"/>
+        <!--<TextBlock Text="{Binding SelectedHero.Name, FallbackValue='Name'}" FontSize="35" 
+                       VerticalAlignment="Center" Margin="267,0,267,0" />-->
+        <TextBlock Text="{Binding CurrentHero.Name, FallbackValue='Name'}" FontSize="35" 
                        VerticalAlignment="Center" Margin="267,0,267,0" />
     </Grid>
 </Page>

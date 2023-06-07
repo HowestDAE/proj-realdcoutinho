@@ -27,10 +27,7 @@ namespace SuperHeros.ViewModel
         public DetailPageVM()
         {
             // Set default CurrentPokemon
-            CurrentHero = new Hero()
-            {
-                Name = "Flareon",
-            };
+            CurrentHero = new Hero();
         }
 
     }

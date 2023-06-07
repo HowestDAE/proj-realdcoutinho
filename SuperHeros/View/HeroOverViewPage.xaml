@@ -17,51 +17,51 @@
 
 
     <Grid>
+
+
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
+            <RowDefinition Height="30" />
             <!-- First Row -->
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="25" />
             <RowDefinition Height="*" />
-            <!-- Second Row -->
-            <RowDefinition Height="40" />
-            <!-- Third Row -->
+
         </Grid.RowDefinitions>
 
         <!-- First Row - Title -->
         <TextBlock Grid.Row="0" Text="Title" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-        <Grid Grid.Row="2">
-            <ComboBox x:Name="pokeTypes" Grid.Row="0" ItemsSource="{Binding FilterTypes}" SelectedItem="{Binding SelectedType}"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--<ComboBox x:Name="pokeTypes" Grid.Row="0" ItemsSource="{Binding FilterTypes}" SelectedItem="{Binding SelectedType}"/>-->
+            <ListBox x:Name="FilterList"
+         ItemsSource="{Binding FilterTypes}" SelectedIndex="0"
+         SelectedItem="{Binding SelectedType}" SelectionMode="Single" Background="Transparent">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="5" />
+
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
         </Grid>
         <!-- Second Row - Two Columns -->
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <!--<ColumnDefinition Width="80
-                                  " />
-                --><!-- Left Column --><!--
-                <ColumnDefinition Width="200" />
-                --><!-- Right Column --><!--
-                <ColumnDefinition Width="*" />-->
-            </Grid.ColumnDefinitions>
-
-            <!-- Left Column Content -->
-            <TextBlock Grid.Column="0" Text="pictures" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
-
-            <!-- Right Column Content -->
-            <TextBlock Grid.Column="1" Text="names" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
-
+        <Grid Grid.Row="2">
 
 
 
             <!-- Hero SELECTION -->
             <ListBox x:Name="HeroList"
-         Grid.Row="2" Grid.Column="1"
          ItemsSource="{Binding Heros}" SelectedIndex="0"
-         SelectedItem="{Binding SelectedHero}" SelectionMode="Single">
+         SelectedItem="{Binding SelectedHero}" SelectionMode="Single" Grid.ColumnSpan="2" Background="Transparent">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="4" />
+                        <UniformGrid Columns="4" Rows="2"/>
+
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
@@ -74,8 +74,14 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
+        <Button
+            Grid.Row="3"
+            VerticalAlignment="Top"
+                Command="{Binding SwitchDataMode}"
+                Content="{Binding DataText}" Height="28" Margin="0,550,0,0"/>
 
         <!-- Third Row - Button -->
     </Grid>
+
 </Page>
 

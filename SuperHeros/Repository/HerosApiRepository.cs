@@ -10,12 +10,12 @@ using SuperHeros.Model;
 
 namespace SuperHeros.Repository
 {
-    internal class HerosApiRepository /*: ISuperHeroRepository*/
+    public class HerosApiRepository : ISuperHeroRepository
     {
         private static List<Hero> _heros;
         private static List<int> _heroIds;
 
-        public static async Task<List<Hero>> GetHeros()
+        public async Task<List<Hero>> GetHeros()
         {
             if (_heros != null) return _heros;
 
@@ -33,7 +33,7 @@ namespace SuperHeros.Repository
                 _heroIds.Add(107); //balck widow
             }
 
-         
+
 
             _heros = new List<Hero>();
 
@@ -71,53 +71,46 @@ namespace SuperHeros.Repository
         }
 
 
-        public static async Task<List<string>> GetHeroTypes()
+        public List<string> GetHeroTypes()
         {
-            List<Hero> allHeros = await GetHeros();
-
             List<string> types = new List<string>();
 
-            List<string> uniquePublishers = allHeros.Select(hero => hero.Biography.Publisher).Distinct().ToList();
-            List<string> uniqueGenders = allHeros.Select(hero => hero.Appearance.Gender).Distinct().ToList();
-
-            types.AddRange(uniquePublishers);
-            types.AddRange(uniqueGenders);
+            types.Add("All");
+            types.Add("Male");
+            types.Add("Female");
+            types.Add("DC Comics");
+            types.Add("Marvel Comics");
 
             return types;
         }
 
+
+        public List<Hero> GetHeroByTypes(string heroType)
+        {
+            List<Hero> list = new List<Hero>();
+            if (heroType == "All") return _heros;
+
+            if (heroType == "Male" || heroType == "Female")
+            {
+                list = GetHerosByGender(heroType);
+            }
+            if (heroType == "DC Comics" || heroType == "Marvel Comics")
+            {
+                list = GetHerosByPublisher(heroType);
+            }
+            return list;
+        }
+
+
         #region FILTERS
-        public static async Task<List<Hero>> GetHerosByPublisherAsync(string publisher)
+        private List<Hero> GetHerosByPublisher(string publisher)
         {
-            if (_heros == null)
-            {
-                _heros = await GetHeros();
-            }
-
-            if (publisher.ToLower() == "all") return _heros;
-            else return _heros.Where(_heros => _heros.Biography.Publisher.ToLower() == publisher.ToLower()).ToList();
+            return _heros.Where(_heros => _heros.Biography.Publisher.ToLower() == publisher.ToLower()).ToList();
         }
 
-        public static async Task<List<Hero>> GetHerosByGenderAsync(string gender)
+        private List<Hero> GetHerosByGender(string gender)
         {
-            if (_heros == null)
-            {
-                _heros = await GetHeros();
-            }
-
-            if (gender.ToLower() == "all") return _heros;
-            else return _heros.Where(_heros => _heros.Appearance.Gender.ToLower() == gender.ToLower()).ToList();
-        }
-
-        public static async Task<List<Hero>> GetHerosByNameAsync(string name)
-        {
-            if (_heros == null)
-            {
-                _heros = await GetHeros();
-            }
-
-            if (name.ToLower() == "all") return _heros;
-            else return _heros.Where(_heros => _heros.Name.ToLower() == name.ToLower()).ToList();
+            return _heros.Where(_heros => _heros.Appearance.Gender.ToLower() == gender.ToLower()).ToList();
         }
         #endregion
 

@@ -11,5 +11,8 @@ namespace SuperHeros.Repository
     public interface ISuperHeroRepository
     {
         Task<List<Hero>> GetHeros();
+        List<string> GetHeroTypes();
+        //Task<List<string>> GetHeroTypes();
+        List<Hero> GetHeroByTypes(string heroType);
     }
 }
