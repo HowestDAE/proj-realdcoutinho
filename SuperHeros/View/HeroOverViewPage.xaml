@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:SuperHeros.View"
             xmlns:vm="clr-namespace:SuperHeros.ViewModel"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+              d:DesignHeight="600" d:DesignWidth="1244"
       Title="HeroOverViewPage"
       Background="Gray">
 
@@ -22,24 +22,47 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
+            <!--// Title-->
             <!-- First Row -->
             <RowDefinition Height="25" />
+            <!--//filters-->
             <RowDefinition Height="*" />
+            <!--//contents-->
+
+            <!--//BUTTONS-->
+            <!--//contents-->
 
         </Grid.RowDefinitions>
 
+
+
+        <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3"
+       Source="https://images6.alphacoders.com/705/705204.jpg"
+       Stretch="UniformToFill"/>
+
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3"
+               Fill="White" Opacity="0.2" />
         <!-- First Row - Title -->
         <TextBlock Grid.Row="0" Text="Title" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Height="25" VerticalAlignment="Top">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="500"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
+            <Rectangle Fill="Black" Opacity="0.7" />
             <!--<ComboBox x:Name="pokeTypes" Grid.Row="0" ItemsSource="{Binding FilterTypes}" SelectedItem="{Binding SelectedType}"/>-->
             <ListBox x:Name="FilterList"
-         ItemsSource="{Binding FilterTypes}" SelectedIndex="0"
+                     
+         ItemsSource="{Binding FilterTypes}" SelectedIndex="0" 
          SelectedItem="{Binding SelectedType}" SelectionMode="Single" Background="Transparent">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Foreground" Value="White"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="5" />
@@ -57,28 +80,38 @@
             <!-- Hero SELECTION -->
             <ListBox x:Name="HeroList"
          ItemsSource="{Binding Heros}" SelectedIndex="0"
-         SelectedItem="{Binding SelectedHero}" SelectionMode="Single" Grid.ColumnSpan="2" Background="Transparent">
+         SelectedItem="{Binding SelectedHero}" SelectionMode="Single" Background="Transparent">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="4" Rows="2"/>
-
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <Image Source="{Binding ImageImage.url}" Height="96" Width="54" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding Name}" Foreground="Black" FontSize="21"/>
-                        </StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0"  Grid.RowSpan="2"  Source="{Binding ImageImage.url}"  HorizontalAlignment="Stretch"  Stretch="UniformToFill" Width="170"/>
+                            <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
+                            Fill="Black" Opacity="0.7" />
+                            <TextBlock Grid.Row="1" Text="{Binding Name}" Foreground="White" FontSize="21" HorizontalAlignment="Center"/>
+
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Height" Value="200"/>
+                        <Setter Property="Width" Value="200"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
         </Grid>
         <Button
-            Grid.Row="3"
-            VerticalAlignment="Top"
                 Command="{Binding SwitchDataMode}"
-                Content="{Binding DataText}" Height="28" Margin="0,550,0,0"/>
+                Content="{Binding DataText}" Margin="499,28,0,0" Grid.RowSpan="2" Background="Black" Foreground="White" Opacity="0.8"/>
 
         <!-- Third Row - Button -->
     </Grid>

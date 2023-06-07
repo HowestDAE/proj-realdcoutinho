@@ -81,6 +81,9 @@ namespace SuperHeros.Model
         [JsonProperty(PropertyName = "gender")]
         public string Gender { get; set; }
 
+        [JsonProperty(PropertyName = "Race")]
+        public string Race { get; set; }
+
         [JsonProperty(PropertyName = "height")]
         public List<string> Height { get; set; }
 

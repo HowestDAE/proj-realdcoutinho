@@ -20,7 +20,7 @@ namespace SuperHeros.ViewModel
         private ISuperHeroRepository _heroLocalRepository = new HerosLocalRepository();
 
 
-        private bool _IsUsingApi = false;
+        private bool _IsUsingApi = true;
 
         public bool IsUsingAPI
         {
@@ -37,7 +37,10 @@ namespace SuperHeros.ViewModel
             get { return _heroList; }
             set
             {
+
+
                 _heroList = value;
+
                 OnPropertyChanged(nameof(Heros));
             }
         }
@@ -95,18 +98,9 @@ namespace SuperHeros.ViewModel
 
         public HeroOverViewVM()
         {
-            //if(_IsUsingApi)
-            //{
-            //    LoadHerosAsync();
-            //    FilterTypes = _heroApiRepository.GetHeroTypes();
-            //}
-            //else
-            //{
-                LoadHerosAsync();
-                LoadHeros();
-                FilterTypes = _heroLocalRepository.GetHeroTypes();
-            //}
-
+            //LoadHeros();
+            LoadHerosAsync();
+            FilterTypes = _heroLocalRepository.GetHeroTypes();
         }
 
 

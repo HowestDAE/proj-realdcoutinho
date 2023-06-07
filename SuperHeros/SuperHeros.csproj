@@ -92,6 +92,7 @@
     <Compile Include="ViewModel\DetailPageVM.cs" />
     <Compile Include="ViewModel\HeroOverViewVM.cs" />
     <Compile Include="ViewModel\MainViewVM.cs" />
+    <Compile Include="View\Converters\FirstElementConverter.cs" />
     <Compile Include="View\HeroDetailPage.xaml.cs">
       <DependentUpon>HeroDetailPage.xaml</DependentUpon>
     </Compile>

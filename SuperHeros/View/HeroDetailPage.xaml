@@ -5,20 +5,265 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SuperHeros.View"
       xmlns:vm="clr-namespace:SuperHeros.ViewModel"
+      xmlns:converters="clr-namespace:SuperHeros.View.Converters"
 
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+
+              d:DesignHeight="600" d:DesignWidth="1244"
       Title="HeroDetailPage">
+    <Page.Resources>
+        <converters:FirstElementConverter x:Key="FirstElementConverter"/>
+    </Page.Resources>
 
     <Page.DataContext>
         <vm:DetailPageVM/>
     </Page.DataContext>
 
-    <Grid>
-        <Image Source="http://i.imgur.com/tJDTJwX.png" Stretch="UniformToFill"/>
-        <!--<TextBlock Text="{Binding SelectedHero.Name, FallbackValue='Name'}" FontSize="35" 
+    <!--<Grid>
+        <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3"
+       Source="https://images6.alphacoders.com/705/705204.jpg"
+       Stretch="UniformToFill"/>
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3"
+               Fill="White" Opacity="0.2" />
+        -->
+    <!--<TextBlock Text="{Binding SelectedHero.Name, FallbackValue='Name'}" FontSize="35" 
                        VerticalAlignment="Center" Margin="267,0,267,0" />-->
+    <!--
         <TextBlock Text="{Binding CurrentHero.Name, FallbackValue='Name'}" FontSize="35" 
-                       VerticalAlignment="Center" Margin="267,0,267,0" />
+                       VerticalAlignment="Top" Margin="267,59,267,0" />
+    </Grid>-->
+
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <!-- First column -->
+            <ColumnDefinition Width="*"/>
+            <!-- Second column -->
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3"
+       Source="https://images6.alphacoders.com/705/705204.jpg"
+       Stretch="UniformToFill"/>
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3"
+               Fill="White" Opacity="0.2" />
+
+        <!-- First column content -->
+        <Grid Grid.Column="0">
+            <Image Grid.Column="0"  Source="{Binding CurrentHero.ImageImage.url}"  Stretch="UniformToFill" Margin="27,26,22,24"/>
+        </Grid>
+
+        <!-- Second column content -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <!-- First row in the second column -->
+                <RowDefinition Height="20"/>
+                <!-- Second row in the second column -->
+                <RowDefinition Height="*"/>
+                <!-- Third row in the second column -->
+                <RowDefinition Height="*"/>
+                <!-- Fourth row in the second column -->
+            </Grid.RowDefinitions>
+
+            <!-- Content for the first row in the second column -->
+            <Grid Grid.Row="0">
+                <TextBlock Text="{Binding CurrentHero.Name, FallbackValue='Name'}" FontSize="30" VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <TextBlock Text="{Binding CurrentHero.Biography.Publisher, FallbackValue='Publisher'}" FontSize="20" VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center"/>
+            </Grid>
+
+
+
+            <!-- Third row divided into two columns -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <!-- First column in the third row -->
+                    <ColumnDefinition/>
+                    <!-- Second column in the third row -->
+                </Grid.ColumnDefinitions>
+
+                <!-- First column in the third row -->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <!-- First row in the first column of the third row -->
+                        <RowDefinition Height="*"/>
+                        <!-- Second row in the first column of the third row -->
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+               Fill="Black" Opacity="0.5" Margin="10,10,16,17" />
+
+                    <TextBlock Text="Biography" FontSize="25" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <!-- First column in the third row -->
+                            <ColumnDefinition/>
+                            <!-- Second column in the third row -->
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <!-- First row in the first column of the third row -->
+                            <RowDefinition Height="*"/>
+                            <!-- Second row in the first column of the third row -->
+                            <RowDefinition Height="*"/>
+
+                            <RowDefinition Height="*"/>
+
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="   Name:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding CurrentHero.Biography.FullName, FallbackValue='Full-NAME'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="   Origins:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding CurrentHero.Biography.PlaceOfBirth, FallbackValue='Place Of Birth'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="   Apperance:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding CurrentHero.Biography.FirstAppearance, FallbackValue='1st Apperance'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="   AlterEgos:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding CurrentHero.Biography.AlterEgos, FallbackValue='Alter Egos'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <!-- First row in the first column of the third row -->
+                        <RowDefinition Height="*"/>
+                        <!-- Second row in the first column of the third row -->
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+               Fill="Black" Opacity="0.5" Margin="10,10,16,17" />
+
+                    <TextBlock Text="Appereance" FontSize="25" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <!-- First column in the third row -->
+                            <ColumnDefinition/>
+                            <!-- Second column in the third row -->
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <!-- First row in the first column of the third row -->
+                            <RowDefinition Height="*"/>
+                            <!-- Second row in the first column of the third row -->
+                            <RowDefinition Height="*"/>
+
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+
+                        </Grid.RowDefinitions>
+
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="   Gender:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding CurrentHero.Appearance.Gender, FallbackValue='Gender'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="   Race:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding CurrentHero.Appearance.Race, FallbackValue='Gender'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="   Height:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding CurrentHero.Appearance.Height, Converter={StaticResource FirstElementConverter}, FallbackValue='x'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="   Weight:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding CurrentHero.Appearance.Weight, Converter={StaticResource FirstElementConverter},FallbackValue='xx'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Hair Color:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding CurrentHero.Appearance.HairColor, FallbackValue='Hair'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="5" Text="Eye Color:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding CurrentHero.Appearance.EyeColor, FallbackValue='Eye'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                    </Grid>
+                </Grid>
+               
+            </Grid>
+
+            <!-- Content for the fourth row in the second column -->
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+               Fill="Black" Opacity="0.5" Margin="10,10,16,17" />
+                <Grid Grid.Row="0">
+                    <TextBlock Text="Power Statistics" FontSize="30" VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center"/>
+
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <!-- First row in the first column of the third row -->
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <!-- First column in the third row -->
+                        <ColumnDefinition Width="300"/>
+                        <!-- Second column in the third row -->
+                        <ColumnDefinition Width="100"/>
+                        <!-- First column in the third row -->
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="   Combat:" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding CurrentHero.PowerStats.Combat, FallbackValue='Combat'}" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="   Durability:" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding CurrentHero.PowerStats.Durability, FallbackValue='Durability'}" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="   IQ:" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding CurrentHero.PowerStats.Intelligence, FallbackValue='Intelligence'}" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+
+
+                    <TextBlock Grid.Column="2" Grid.Row="0" Text="   Power:" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="4" Grid.Row="0" Text="{Binding CurrentHero.PowerStats.Power, FallbackValue='Power'}" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                    <TextBlock Grid.Column="2" Grid.Row="1" Text="   Speed:" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="4" Grid.Row="1" Text="{Binding CurrentHero.PowerStats.Speed, FallbackValue='Speed'}" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                    <TextBlock Grid.Column="2" Grid.Row="2" Text="   Strenght:" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="4" Grid.Row="2" Text="{Binding CurrentHero.PowerStats.Strength, FallbackValue='Strenght'}" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+
+
+                    <!--<TextBlock Grid.Column="0" Grid.Row="2" Text="   Height:" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding CurrentHero.Appearance.Height, Converter={StaticResource FirstElementConverter}, FallbackValue='x'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="   Weight:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding CurrentHero.Appearance.Weight, Converter={StaticResource FirstElementConverter},FallbackValue='xx'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Hair Color:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding CurrentHero.Appearance.HairColor, FallbackValue='Hair'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+
+                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Eye Color:" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding CurrentHero.Appearance.EyeColor, FallbackValue='Eye'}" FontSize="15" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>-->
+
+                </Grid>
+            </Grid>
+        </Grid>
+
+
     </Grid>
+
+
+
 </Page>
