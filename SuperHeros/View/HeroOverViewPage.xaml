@@ -21,7 +21,7 @@
 
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="50" />
             <!--// Title-->
             <!-- First Row -->
             <RowDefinition Height="25" />
@@ -43,12 +43,13 @@
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3"
                Fill="White" Opacity="0.2" />
         <!-- First Row - Title -->
-        <TextBlock Grid.Row="0" Text="Title" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Rectangle Fill="Black" Opacity="0.7" />
+        <TextBlock Grid.Row="0" Text="Super Heros" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
 
         <Grid Grid.Row="1" Height="25" VerticalAlignment="Top">
-            
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -70,6 +71,10 @@
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
+            <Button Grid.Column="1" 
+                Command="{Binding SwitchDataMode}"
+                Content="{Binding DataText}" Background="Black" Foreground="White" Opacity="0.8" Grid.Row="1"/>
+
 
         </Grid>
         <!-- Second Row - Two Columns -->
@@ -109,10 +114,7 @@
                 </ListBox.ItemContainerStyle>
             </ListBox>
         </Grid>
-        <Button
-                Command="{Binding SwitchDataMode}"
-                Content="{Binding DataText}" Margin="499,28,0,0" Grid.RowSpan="2" Background="Black" Foreground="White" Opacity="0.8"/>
-
+        
         <!-- Third Row - Button -->
     </Grid>
 

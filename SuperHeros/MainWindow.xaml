@@ -17,7 +17,8 @@
         <Frame NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"/>
         <Button VerticalAlignment="Bottom"
                 Command="{Binding SwitchPageCommand}"
-                Content="{Binding CommandText}" Margin="622,0,0,0"/>
+                Content="{Binding CommandText}"
+                Background="Black" Foreground="White" Opacity="0.8"/>
 
 
     </Grid>

@@ -20,7 +20,7 @@ namespace SuperHeros.ViewModel
         private ISuperHeroRepository _heroLocalRepository = new HerosLocalRepository();
 
 
-        private bool _IsUsingApi = true;
+        private bool _IsUsingApi = false;
 
         public bool IsUsingAPI
         {
@@ -37,12 +37,15 @@ namespace SuperHeros.ViewModel
             get { return _heroList; }
             set
             {
-
-
                 _heroList = value;
-
-                OnPropertyChanged(nameof(Heros));
+                SetProperty(ref _heroList, value);
+                if (_heroList != null)
+                {
+                    OnPropertyChanged(nameof(Heros));
+                }
             }
+
+
         }
 
         private Hero _selectedHero = new Hero();
@@ -52,8 +55,13 @@ namespace SuperHeros.ViewModel
             set
             {
                 _selectedHero = value;
-                OnPropertyChanged(nameof(SelectedHero));
+                SetProperty(ref _selectedHero, value);
+                if (_selectedHero != null)
+                {
+                    OnPropertyChanged(nameof(SelectedHero));
+                }
             }
+
         }
 
         private List<string> _filterTypes;
@@ -63,6 +71,7 @@ namespace SuperHeros.ViewModel
             set
             {
                 _filterTypes = value;
+                SetProperty(ref _filterTypes, value);
                 if (_filterTypes != null)
                 {
                     OnPropertyChanged(nameof(FilterTypes));
@@ -98,7 +107,7 @@ namespace SuperHeros.ViewModel
 
         public HeroOverViewVM()
         {
-            //LoadHeros();
+            LoadHeros();
             LoadHerosAsync();
             FilterTypes = _heroLocalRepository.GetHeroTypes();
         }

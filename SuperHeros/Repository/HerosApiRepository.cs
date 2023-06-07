@@ -88,6 +88,7 @@ namespace SuperHeros.Repository
         public List<Hero> GetHeroByTypes(string heroType)
         {
             List<Hero> list = new List<Hero>();
+
             if (heroType == "All") return _heros;
 
             if (heroType == "Male" || heroType == "Female")

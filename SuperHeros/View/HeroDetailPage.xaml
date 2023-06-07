@@ -37,7 +37,7 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
             <!-- First column -->
             <ColumnDefinition Width="*"/>
             <!-- Second column -->
@@ -202,7 +202,7 @@
                 <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
                Fill="Black" Opacity="0.5" Margin="10,10,16,17" />
                 <Grid Grid.Row="0">
-                    <TextBlock Text="Power Statistics" FontSize="30" VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Power Statistics" FontSize="30" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center"/>
 
                 </Grid>
                 <Grid Grid.Row="1">
@@ -214,13 +214,13 @@
 
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100*"/>
                         <!-- First column in the third row -->
-                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="300*"/>
                         <!-- Second column in the third row -->
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100*"/>
                         <!-- First column in the third row -->
-                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="300*"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Grid.Row="0" Text="   Combat:" FontSize="20" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
