@@ -28,7 +28,13 @@ namespace SuperHeros.ViewModel
             set
             {
                 _IsUsingApi = value;
+                LoadHeros();
+                LoadHerosAsync();
                 OnPropertyChanged(nameof(IsUsingAPI));
+                OnPropertyChanged(nameof(SelectedType));
+                OnPropertyChanged(nameof(Heros));
+
+
             }
         }
 

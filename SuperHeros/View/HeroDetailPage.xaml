@@ -44,7 +44,7 @@
         </Grid.ColumnDefinitions>
 
         <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3"
-       Source="https://images6.alphacoders.com/705/705204.jpg"
+       Source="/Resources/Images/BackGround.jpg"
        Stretch="UniformToFill"/>
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3"
                Fill="White" Opacity="0.2" />

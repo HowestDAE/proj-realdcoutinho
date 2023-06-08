@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SuperHeros"
         xmlns:vm="clr-namespace:SuperHeros.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1244">
+        Title="SUPER HEROES" Height="600" Width="1244">
 
     <Window.DataContext>
         <vm:MainViewVM/>

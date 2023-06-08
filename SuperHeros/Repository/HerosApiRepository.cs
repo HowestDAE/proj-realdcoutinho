@@ -25,7 +25,7 @@ namespace SuperHeros.Repository
                 _heroIds.Add(70);  //batman // works
                 _heroIds.Add(263); //flash  // works
                 _heroIds.Add(720); //wonder woman // works
-                _heroIds.Add(542); //catwoman // works
+                _heroIds.Add(165); //catwoman // works
 
                 _heroIds.Add(620); //spider man
                 _heroIds.Add(346); //iron man // works
